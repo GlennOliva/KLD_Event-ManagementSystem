@@ -29,7 +29,7 @@ $id = $_GET['id'];
 
 //create sql querty
 
-$sql = "SELECT * FROM tbl_user WHERE id=$id";
+$sql = "SELECT * FROM tbl_std WHERE id=$id";
 
 //execute the query
 $result = mysqli_query($conn,$sql);
@@ -48,13 +48,15 @@ if($result == True)
         $rows = mysqli_fetch_assoc($result);
 
         $id = $rows['id'];
-        $full_name = $rows['full_name'];
+        $id_no = $rows['id_no'];
         $email = $rows['email'];
-        $phone_number = $rows['phone_number'];
+        $name = $rows['name'];
         $course = $rows['course'];
-        $year_level = $rows['year_level'];
+        $year = $rows['year'];
         $section = $rows['section'];
-        $date = $rows['created_at'];
+        $username = $rows['username'];
+        $role = $rows['role'];
+        $status = $rows['acc_status'];
 
       
     }
@@ -82,29 +84,150 @@ if($result == True)
                     <div class="col-lg-8">
                         <form method="post" style="border: 2px solid #00204a; padding: 20px; border-radius: 12px;">
                            
+                        <div class="mb-3">
+                                <label for="adminFullname" class="form-label">Id no</label>
+                                <input type="number" class="form-control" name="id_no" placeholder="Enter ID no" value="<?php echo $id_no;?>">
+                            </div>
+                          
                             <div class="mb-3">
-                                <label for="adminFullname" class="form-label">New Full Name</label>
-                                <input type="text" class="form-control" name="userFullname" placeholder="Enter full name" value="<?php echo $full_name;?>" readonly>
+                                <label for="adminEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="Enter Email" value="<?php echo $email;?>">
                             </div>
                             <div class="mb-3">
-                                <label for="adminEmail" class="form-label">New Email</label>
-                                <input type="email" class="form-control" name="userEmail" placeholder="Enter email" value="<?php echo $email;?>" readonly>
+                                <label for="adminFullname" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" placeholder="Enter Name" value="<?php echo $name;?>">
                             </div>
-                            <div class="mb-3">
-                                <label for="adminPhoneNumber" class="form-label">New Phone Number</label>
-                                <input type="number" class="form-control" name="userPhoneNumber" placeholder="Enter phone number" value="<?php echo $phone_number;?>" readonly maxlength="11">
-                            </div>
-                            <div class="mb-3">
-                                <label for="userCourse" class="form-label">New Course</label>
-                                <input type="text" class="form-control" name="userCourse" placeholder="Enter Course" value="<?php echo $course;?>">
-                            </div>
-                            <div class="mb-3">
-                                <label for="userYearlevel" class="form-label">New Year Level</label>
-                                <input type="text" class="form-control" name="userYearlevel" placeholder="Enter Year Level" value="<?php echo $year_level;?>">
-                            </div>
-                            <div class="mb-3">
-                                <label for="userSection" class="form-label">New Section</label>
-                                <input type="text" class="form-control" name="userSection" placeholder="Enter Section" value="<?php echo $section;?>">
+
+                               
+
+                                
+
+                                <div class="mb-3">
+                                    <label for="courseSelect" class="form-label">Select Course</label>
+                                    <select class="form-control" name="courseSelect" id="courseSelect">
+                                    <?php
+                                // Query to fetch all courses from the table
+                                $sql = "SELECT * FROM tbl_course";
+
+                                // Execute the query
+                                $result = mysqli_query($conn, $sql);
+
+                               $count = mysqli_num_rows($result);
+                               if($count > 0 )
+                               {
+                                   while($row = mysqli_fetch_assoc($result))
+                                   {   
+                                       $course_id = $row['id'];
+                                       $course_name = $row['course_name'];
+                                      
+                                       ?>
+                   
+                                        <option <?php if($row['id'] == $course_id) {echo "selected";} ?> value="<?php echo $course_id; ?>"><?php echo $course_name;?></option>
+                                       
+                   
+                                       <?php
+                                   }
+                               }
+
+                               else
+                               {
+                                   //we don't have faculty member
+                                   ?>
+                                   <option value="0" >No Course Found</option>                                    
+                   
+                                   <?php
+                               }
+                               ?>
+                                    </select>
+                      
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="courseSelect" class="form-label">Select Year</label>
+                                    <select class="form-control" name="yearSelect" id="courseSelect">
+                                    <?php
+                                // Query to fetch all courses from the table
+                                $sql = "SELECT * FROM tbl_yearlevel";
+
+                                // Execute the query
+                                $result = mysqli_query($conn, $sql);
+
+                               $count = mysqli_num_rows($result);
+                               if($count > 0 )
+                               {
+                                   while($row = mysqli_fetch_assoc($result))
+                                   {   
+                                       $year_id = $row['id'];
+                                       $yearlevel = $row['yearlevel'];
+                                      
+                                       ?>
+                   
+                   <option <?php if($row['id'] == $year_id) {echo "selected";} ?>  value="<?php echo $year_id; ?>"><?php echo $yearlevel;?></option>
+                                       
+                   
+                                       <?php
+                                   }
+                               }
+                               else
+                               {
+                                   //we don't have faculty member
+                                   ?>
+                                   <option value="0" >No Year Found</option>                                    
+                   
+                                   <?php
+                               }
+                               ?>
+                                    </select>
+                                   
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="courseSelect" class="form-label">Select Section</label>
+                                    <select class="form-control" name="sectionSelect" id="courseSelect">
+                                    <?php
+                                // Query to fetch all courses from the table
+                                $sql = "SELECT * FROM tbl_section";
+
+                                // Execute the query
+                                $result = mysqli_query($conn, $sql);
+
+                               $count = mysqli_num_rows($result);
+                               if($count > 0 )
+                               {
+                                   while($row = mysqli_fetch_assoc($result))
+                                   {   
+                                       $section_id = $row['id'];
+                                       $section_name = $row['section_name'];
+                                      
+                                       ?>
+                   
+                   <option <?php if($row['id'] == $section_id) {echo "selected";} ?>  value="<?php echo $section_id; ?>"><?php echo $section_name;?></option>
+                                       
+                   
+                                       <?php
+                                   }
+                               }
+                               else
+                               {
+                                   //we don't have faculty member
+                                   ?>
+                                   <option value="0" >No Section Found</option>                                    
+                   
+                                   <?php
+                               }
+                               ?>
+                                    </select>
+                                
+                                </div>
+
+                                <div class="mb-3">
+                                <label for="adminStatus" class="form-label">User Status</label>
+                                <select class="form-select" id="adminStatus" name="userStatus">
+                                    <option value="Inactive" <?php echo ($status == 'Inactive') ? 'selected' : ''; ?>>Inactive</option>
+                                    <option value="Active" <?php echo ($status == 'Active') ? 'selected' : ''; ?>>Active</option>
+                                </select>
                             </div>
                             
                         
@@ -121,19 +244,20 @@ if($result == True)
     if(isset($_POST['update_user']))
     {
         $id = $_POST['id'];
-        $full_name = $_POST['userFullname'];
-        $user_email = $_POST['userEmail'];
-        $user_phonenumber = $_POST['userPhoneNumber'];
-        $user_course = $_POST['userCourse'];
-        $user_yearlevel = $_POST['userYearlevel'];
-        $user_section = $_POST['userSection'];
+        $id_no = $_POST['id_no'];
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+        $cid = $_POST['courseSelect'];
+        $sid = $_POST['sectionSelect'];
+        $yid = $_POST['yearSelect'];
+        $acc_status = $_POST['userStatus'];
  
 
 
 
         //create sql query update
-        $sql = "UPDATE tbl_user SET full_name = '$full_name' , email = '$user_email' , phone_number = '$user_phonenumber' ,   
-          course = '$user_course', year_level = '$user_yearlevel', section = '$user_section' WHERE id = '$id'";
+        $sql = "UPDATE tbl_std SET id_no = '$id_no' , email = '$email' , name = '$name' ,   
+         course = '$cid', year = '$yid', section = '$sid', acc_status = '$acc_status' WHERE id = '$id'";
 
         //execute the query
         $result = mysqli_query($conn,$sql);

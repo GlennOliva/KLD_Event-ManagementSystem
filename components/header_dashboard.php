@@ -47,21 +47,97 @@ if (isset($_SESSION['admin_id'])) {
 <body>
 	
 	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="#" class="brand" style="padding-top: 5%;">
-		 <img src="../image/kld-logo.png" style="width: 100%; height: auto; padding-top: 50%; padding-bottom: 15%;" alt="Logo"> 
-		  </a>
-		  
-		<ul class="side-menu" style="padding-top: 45%;">
-			<li><a href="dashboard.php" class="active" ><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li><a href="manage_user.php" class=""><i class='bx bxs-user icon'></i> Manage User</a></li>
-			<li><a href="manage_organization.php" class=""><i class='bx bxs-building-house icon'></i> Manage Organization</a></li>
-			<li><a href="manage_venues.php" class=""><i class='bx bxs-building icon'></i> Manage Venues</a></li>
-			<li><a href="manage_admin.php" class=""><i class='bx bxs-user-circle icon'></i> Manage Admin</a></li>
-			<li><a href="manage_transaction.php" class=""><i class='bx bxs-wallet icon'></i> Manage Transactions</a></li>
+<section id="sidebar">
+		<a href="#" class="brand" style="padding-left: 20%;"></i> KLD Events</a>
+		<ul class="side-menu">
+			<li><a href="dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li class="divider" data-text="Event Management">Event Management</li>
+			<li>
+				<a href="#"><i class='bx bxs-dashboard icon' ></i> Events <i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown">
+					<li><a href="events_calendar.php">Calendar</a></li>
+					<li><a href="manage_events.php">View Events</a></li>
+					<li><a href="add_events.php">Add Events</a></li>
+					<li><a href="pending_events.php">Pending Events</a></li>
+				</ul>
+			</li>
 
-
+			<li>
+				<a href="#" ><i class='bx bxs-location-plus icon' ></i> Venue <i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown">
+					<li><a href="manage_venues.php">View Venue</a></li>
+					<li><a href="add_venue.php">Add Venue</a></li>
+					<li><a href="venue_calendar.php">Venue Calendar</a></li>
 	
+				</ul>
+			</li>
+
+
+			<li>
+				<a href="#"><i class='bx bxs-category icon' ></i> Category <i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown">
+					<li><a href="manage_category.php">View Categories</a></li>
+					<li><a href="add_category.php">Add Category</a></li>
+		
+				</ul>
+			</li>
+		
+
+
+			<li class="divider" data-text="Users">Users</li>
+			<li>
+				<a href="#"><i class='bx bxs-user icon' ></i> Organizers <i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown">
+					<li><a href="manage_organizer.php">View Organizers</a></li>
+					<li><a href="add_organizer.php">Add Organizers</a></li>
+				</ul>
+			</li>
+			<li>
+    <a href="#"><i class='bx bxs-user icon'></i> Students <i class='bx bx-chevron-right icon-right'></i></a>
+    <ul class="side-dropdown">
+        <li><a href="manage_user.php">View Students</a></li>
+        <li><a href="add_user.php">Add Students</a></li>
+	
+    </ul>
+</li>
+
+<li>
+    <a href="#"><i class='bx bxs-graduation icon'></i> Courses <i class='bx bx-chevron-right icon-right'></i></a>
+    <ul class="side-dropdown">
+        <li><a href="manage_course.php">View Courses</a></li>
+        <li><a href="add_course.php">Add Courses</a></li>
+	
+    </ul>
+</li>
+
+<li>
+    <a href="#"><i class='bx bxs-layout icon'></i> Section <i class='bx bx-chevron-right icon-right'></i></a>
+    <ul class="side-dropdown">
+        <li><a href="manage_section.php">View Section</a></li>
+        <li><a href="add_section.php">Add Section</a></li>
+	
+    </ul>
+</li>
+
+<li>
+    <a href="#"><i class='bx bxs-calendar icon'></i> Year_Level <i class='bx bx-chevron-right icon-right'></i></a>
+    <ul class="side-dropdown">
+        <li><a href="manage_yearlevel.php">View YearLevel</a></li>
+        <li><a href="add_yearlevel.php">Add YearLevel</a></li>
+	
+    </ul>
+</li>
+
+<li>
+<a href="#" class=""><i class='bx bxs-user-circle icon'></i> Admin <i class='bx bx-chevron-right icon-right'></i></a>
+    <ul class="side-dropdown">
+        <li><a href="manage_admin.php">View Admin</a></li>
+        <li><a href="add_admin.php">Add Admin</a></li>
+    </ul>
+</li>
+
+		</ul>
+		
 	</section>
 	<!-- SIDEBAR -->
 

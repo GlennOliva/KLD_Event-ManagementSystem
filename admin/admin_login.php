@@ -7,7 +7,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>UM CONFERENCE ROOM LOGIN</title>
+	<title>KLD Events</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
@@ -48,6 +48,8 @@ session_start();
             	</div>
             	
             	<input type="submit" name="login" class="btn" value="Login">
+                <a href="../login.php">Click here to go to login Student & Organizer</a>
+                <br>
             </form>
         </div>
     </div>

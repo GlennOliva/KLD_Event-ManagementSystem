@@ -36,9 +36,10 @@ if(!isset($_SESSION['admin_id']))
                 <table class="table table-hover" id="admin_table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
-                            <th>Venues title:</th>
-                            <th>Venues Category</th>
+                            <th>Venue Id</th>
+                            <th>Venue Image</th>
+                            <th>Venues Name</th>
+                            <th>Venues Description</th>
                             <th>Date</th>
                             <th>Action</th>
                         </tr>
@@ -66,13 +67,15 @@ if(!isset($_SESSION['admin_id']))
                         while($rows=mysqli_fetch_assoc($result))
                         {
                             $id = $rows['id'];
-                            $venueTitle = $rows['venue_title'];
-                            $venueCategory = $rows['venue_category'];
+                            $venueTitle = $rows['venue_name'];
+                            $venueCategory = $rows['venue_desc'];
                             $date = $rows['created_at'];
+                            $image = $rows['image'];
 
                             ?>
                         <tr>
                         <td><?php echo $ids++;?></td>
+                        <td><img src="venue_image/<?php echo $image?>" style="width: 70px;"></td>
                             <td><?php echo $venueTitle;?></td>
                             <td><?php echo $venueCategory;?></td>
                             <td><?php echo $date;?></td>

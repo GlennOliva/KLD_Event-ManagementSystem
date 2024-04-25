@@ -33,77 +33,93 @@ if(!isset($_SESSION['admin_id']))
 			</ul>
 
             <div class="container mt-3 table-border">
-                <table class="table table-hover">
+            <a href="add_user.php" class="btn btn-success btn-sm">Create</a>
+                <table class="table table-hover" id="admin_table">
                     <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Full_Name</th>
+                            <th>Id no</th>
                             <th>Email</th>
-                            <th>Phone_number</th>
+                            <th>Name</th>
                             <th>Course</th>
                             <th>Year_Level</th>
                             <th>Section</th>
-                            <th>Created_at</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Acc Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-                        //query to get all data from tbl_admin database
-                $sql = "SELECT * FROM tbl_user";
+// Query to get all data from tbl_std, joined with course, section, and year tables
+$sql = "
+    SELECT 
+        ts.id,
+        ts.id_no,
+        ts.email,
+        ts.name,
+        tc.course_name,
+        ty.yearlevel,
+        tsec.section_name,
+        ts.username,
+        ts.role,
+        ts.acc_status
+    FROM tbl_std ts
+    LEFT JOIN tbl_course tc ON ts.course = tc.id
+    LEFT JOIN tbl_yearlevel ty ON ts.year = ty.id
+    LEFT JOIN tbl_section tsec ON ts.section = tsec.id
+";
 
-                //execute the query
-                $result = mysqli_query($conn,$sql);
+// Execute the query
+$result = mysqli_query($conn, $sql);
 
-                //check whether if the query is execute or not
+// Check whether the query executed successfully
+if ($result == true) {
+    // Count the rows to check if there's data in the database
+    $count = mysqli_num_rows($result);
+    $ids = 1;
 
-                if($result==True)
-                {
-                    //count the rows to check we have data in database or not
-                    $count = mysqli_num_rows($result);
+    // Check the number of rows
+    if ($count > 0) {
+        while ($rows = mysqli_fetch_assoc($result)) {
+            $id = $rows['id'];
+            $id_no = $rows['id_no'];
+            $email = $rows['email'];
+            $name = $rows['name'];
+            $course_name = $rows['course_name'];  // Use course_name instead of course_id
+            $year_level = $rows['yearlevel'];  // Use year_level instead of year
+            $section_name = $rows['section_name'];  // Use section_name instead of section
+            $username = $rows['username'];
+            $role = $rows['role'];
+            $status = $rows['acc_status'];
 
-                    $ids=1;
+            ?>
+            <tr>
+                <td><?php echo $ids++; ?></td>
+                <td><?php echo $id_no; ?></td>
+                <td><?php echo $email; ?></td>
+                <td><?php echo $name; ?></td>
+                <td><?php echo $course_name; ?></td>  <!-- Display course name -->
+                <td><?php echo $year_level; ?></td>  <!-- Display year level -->
+                <td><?php echo $section_name; ?></td>  <!-- Display section name -->
+                <td><?php echo $username; ?></td>
+                <td><?php echo $role; ?></td>
+                <td><?php echo $status; ?></td>
+                <td>
+                    <a href="update_user.php?id=<?php echo $id; ?>" class="btn btn-primary btn-sm">Update</a>
+                    <form action="code.php" method="post">
+                        <button type="button" class="btn-del delete_userbtn" value="<?php echo $id; ?>">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <!-- More rows can be added here -->
+            <?php
+        }
+    }
+}
+?>
 
-                    //check the num of rows
-                    if($count>0)
-                    {
-                        while($rows=mysqli_fetch_assoc($result))
-                        {
-                            $id = $rows['id'];
-                            $full_name = $rows['full_name'];
-                            $email = $rows['email'];
-                            $phone_number = $rows['phone_number'];
-                            $course = $rows['course'];
-                            $year_level = $rows['year_level'];
-                            $section = $rows['section'];
-                            $date = $rows['created_at'];
-                            
-
-                            ?>
-                        <tr>
-                        <td><?php echo $ids++;?></td>
-                            <td><?php echo $full_name;?></td>
-                            <td><?php echo $email;?></td>
-                            <td><?php echo $phone_number;?></td>
-                            <td><?php echo $course;?></td>
-                            <td><?php echo $year_level;?></td>
-                            <td><?php echo $section;?></td>
-                            <td><?php echo $date;?></td>
-                            
-                            <td>
-                                <a href="update_user.php?id=<?php echo $id;?>" class="btn btn-primary btn-sm">Update</a>
-                              
-                            </td>
-                        </tr>
-                        <!-- More rows can be added here -->
-                        <?php
-
-                        }
-                    }
-                    
-                }
-
-                ?>
                     </tbody>
                 </table>
             </div>
@@ -124,7 +140,10 @@ if(!isset($_SESSION['admin_id']))
 	</section>
 	<!-- NAVBAR -->
 
+    <script src="js/del-user.js"></script>
+  
 	<?php
 	include('../components/footer.php');
+ 
 	
 	?>

@@ -41,7 +41,7 @@
                 <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                 <li class="scroll-to-section"><a href="#about">About</a></li>
                 <li class="scroll-to-section"><a href="#howitworks">How it works?</a></li>
-                <li class="scroll-to-section"><div class="border-first-button"><a href="student_login.php"><i class="fa fa-user"></i> Login</a></div></li>
+                <li class="scroll-to-section"><div class="border-first-button"><a href="../login.php"><i class="fa fa-user"></i> Login</a></div></li>
               </ul>        
               <a class="menu-trigger">
                   <span>Menu</span>
@@ -72,7 +72,7 @@
                     </h3>
                     <p>A Website for KLD Events</p>
                     <div class="btn-box">
-                      <a href="student_login.php" class="btn1">
+                      <a href="../login.php" class="btn1">
                         Login
                       </a>
                     </div>

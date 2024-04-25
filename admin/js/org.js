@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-
     $('.delete_orgbtn').click(function (e){
         e.preventDefault();
 
@@ -25,12 +23,12 @@ $(document).ready(function(){
                 },
                 success: function(response)
                 {
-                    if(response == 300)
+                    if(response == 3)
                     {
                         swal("Success!","Org Successfully delete" , "success");
                         $("#admin_table").load(location.href + " #admin_table");
                     }
-                    else if (response == 600){
+                    else if (response == 6){
                         swal("Error!","Failed to delete" , "error");
                     }
                 }
